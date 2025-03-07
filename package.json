@@ -1,0 +1,12 @@
+{
+  "name": "mytestproject",
+  "version": "1.0.0",
+  "description": "Projekt testowy xd",
+  "main": "index.js",
+  "scripts": {
+    "test": "nodemon index.js",
+    "start": "node index.js"
+  },
+  "author": "Danylo Pavlov",
+  "license": "ISC"
+}
