@@ -6,14 +6,24 @@ const client = new pg.Client({
   port: 5432,
   user: 'user14',
   password: '7SAZONQZ',
-  database: ''
+  database: 'user14_db'
 });
 
 const getFromDb = async () => {
-    await client.connect();
+    
     const result = await client.query('SELECT * FROM grades');
     console.table(result.rows);
-    await client.end();
 }
 
-getFromDb();
+const insertToDb = async (student_id, course_id, grade) => {
+    await client.connect();
+    student_id = prompt("Podaj student id: ");
+    course_id = prompt("Podaj id przedmiotu: ");
+    grade = prompt("Podaj ocene: ");
+    const result = await client.query("INSERT INTO grades (" + student_id + ", " + course_id + ", " + grade + ") VALUES(1, 1, 5);")
+}
+client.connect().then(async () => {
+    await insertToDb();
+    await getFromDb();
+}).then
+await client.end();
