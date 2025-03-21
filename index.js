@@ -1,25 +1,19 @@
-const express = require('express');
-const app = express();
-const port = 3000;
+const pg = require('pg');
 
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-
-app.use((req, res, next) => {
-    console.log('Zadanie: ', req.method, req.url);
-    next();
+// Create a new client instance
+const client = new pg.Client({
+  host: '192.168.0.207',
+  port: 5432,
+  user: 'user14',
+  password: '7SAZONQZ',
+  database: ''
 });
 
-app.get('/', (req, res) => {
-    console.log('Zadanie GET dla strony glownej' , req.query);
-    res.send('Hello World!');
-});
+const getFromDb = async () => {
+    await client.connect();
+    const result = await client.query('SELECT * FROM grades');
+    console.table(result.rows);
+    await client.end();
+}
 
-app.post('/', (req, res) => {
-    console.log('Zadanie POST dla strony glownej' , req);
-    res.send('Hello World!');
-});
-
-app.listen(port, () => {
-    console.log(`Pracuje pod adresem http://localhost:${port}`);
-});
+getFromDb();
