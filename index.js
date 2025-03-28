@@ -31,6 +31,7 @@ app.post('/grades/:student_id/', async (req, res) => {
     console.log("Request Body:", req.body);
     res.end();
 });
-app.listen(3000, () => {
+app.listen(3000, async() => {
+    await client.connect();
   console.log('Server is running on port 3000');
 }); 
