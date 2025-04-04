@@ -51,3 +51,7 @@ app.listen(3000, async() => {
     await client.connect();
   console.log('Server is running on port 3000');
 });
+app.on('close', async () => {
+  await client.connect(); // Disconnect from the database when the server closes
+  console.log('Disconnected from the database');
+});
